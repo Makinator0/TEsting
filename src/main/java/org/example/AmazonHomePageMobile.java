@@ -57,17 +57,26 @@ public class AmazonHomePageMobile {
         WebElement clearSearchButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//android.view.View[@content-desc='Clear search keywords']")));
         clearSearchButton.click();
         Thread.sleep(7000); // 7 seconds delay
-        searchTerm = System.getProperty("searchTerm", "Python");
+        searchTerm = System.getProperty("searchTerm", "Java");
         for (char ch : searchTerm.toCharArray()) {
-            // Convert the character to its uppercase version as AndroidKey uses uppercase
             driver.pressKey(new KeyEvent(AndroidKey.valueOf(Character.toString(ch).toUpperCase())));
         }
         driver.pressKey(new KeyEvent(AndroidKey.ENTER));
+        Thread.sleep(7000); // 7 seconds delay
     }
 
     public void goToBooksCategory() throws InterruptedException {
-        WebElement booksElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//android.widget.TextView[@text='Books']")));
+        WebElement booksElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//android.view.View[@content-desc=\"Clear search keywords\"]")));
         booksElement.click();
+        Thread.sleep(2000); // 7 seconds delay
+        driver.pressKey(new KeyEvent(AndroidKey.SPACE));
+        driver.pressKey(new KeyEvent(AndroidKey.B));
+        driver.pressKey(new KeyEvent(AndroidKey.O));
+        driver.pressKey(new KeyEvent(AndroidKey.O));
+        driver.pressKey(new KeyEvent(AndroidKey.K));
+        driver.pressKey(new KeyEvent(AndroidKey.S));
+        Thread.sleep(7000); // 7 seconds delay
+        driver.pressKey(new KeyEvent(AndroidKey.ENTER));
         Thread.sleep(7000); // 7 seconds delay
     }
 }

@@ -28,7 +28,7 @@ public class AmazonSearchPage {
 
     public List<Book> extractBooks() {
         List<Book> books = new ArrayList<>();
-        List<WebElement> bookElements = driver.findElements(By.xpath("//android.webkit.WebView[@text=\"Amazon.com: "+searchTerm+" Books\"]/android.view.View/android.view.View/android.view.View/android.view.View"));
+        List<WebElement> bookElements = driver.findElements(By.xpath("//android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View"));
         for (WebElement bookElement : bookElements) {
             try {
                 books.add(extractBookData(bookElement));
@@ -47,16 +47,13 @@ public class AmazonSearchPage {
         String price = "N/A";
         boolean isBestSeller = false;
 
-        try {
             title = safeGetText(bookElement, ".//android.widget.TextView[contains(@text, '"+searchTerm+"')]"); // Adjust the XPath to match your structure
             author = safeGetText(bookElement, ".//android.widget.TextView[contains(@text, 'by')]/following-sibling::android.widget.TextView[1]");
             // Adjust the XPath to match your structure
             price = safeGetText(bookElement, ".//android.widget.TextView[contains(@text, '$')]"); // Adjust the XPath to match your structure
             WebElement bestSellerBadge = bookElement.findElement(By.xpath(".//android.view.View[contains(@text, 'Best Seller')]"));
             isBestSeller = bestSellerBadge != null && bestSellerBadge.getText().contains("Best Seller");
-        } catch (NoSuchElementException e) {
-            System.err.println("Element not found for book: " + title);
-        }
+
 
         return new Book(title, author, price, isBestSeller);
     }

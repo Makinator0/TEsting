@@ -16,7 +16,7 @@ public class BookDetailsPageMobile {
     private AndroidDriver driver;
     private WebDriverWait wait;
     private String searchTerm;
-    private String bookUrl = "https://www.amazon.com/Python-Programming-Fundamentals-Comprehensive-Analysis-ebook/dp/B0D4B3BMG6/ref=mp_s_a_1_1_sspa?dib=eyJ2IjoiMSJ9.66xg9I21CkHmcRHcyLwr55_0cqSh51xu5OqeH8aNkVvcf2aK3bAP5aQGELQ9lbYGFsrJEkVN0Vt9iLixNjL-ZikJAoGoVnegzEoaAMJvZkDYXl8IXZsX_efry_X-Iq9MKxR5Er7JDBxCjabo6Qw-HcEuH7-dh1ZfV9IKBxwzMexvEUlAM63EEpW7XSO-6rMVKp7KYJWwFkbNOtc11fTFIw.-RXIlIINrjIOb2rpTlWAygqFMi32LYg6GGe-yXDJaZg&dib_tag=se&keywords=python+books&qid=1716544531&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9waG9uZV9zZWFyY2hfYXRm&psc=1";
+    private String bookUrl = "https://www.amazon.com/Effective-Java-Joshua-Bloch/dp/0134685997/ref=sr_1_1?crid=LFH2JLGS3V8X&dib=eyJ2IjoiMSJ9.95M_fzc7E-PFO4Y-2pVeJjiZBHRYf4rUlqL_xYgfJrKezE0EaUQG9MWrVXI8HkHer1bLZ9uNbR4sHH63GEZ8-aKlmHJLnxfgj7527rQaVJt0FnO3VwXsiW6GcZZmTP3CMwxXfEfohN70gKLcjmEo8kJI9_fONAKII4R8y6-ERPBcN7VQ7PNbm0cWc7pL_AKyRRkusu3cDWVkDq1BHefWZp4r_msYRx9gmE7wrzdP6Hs.qL5appUVJPupeZMD8JZ3YnLBK4OYvfG9sEo4A-TKAB4&dib_tag=se&keywords=java+books&qid=1716561462&s=books&sprefix=java+books%2Cstripbooks-intl-ship%2C323&sr=1-1";
     public BookDetailsPageMobile(AppiumDriver driver, WebDriverWait wait) {
         this.driver = (AndroidDriver) driver;
         this.wait = wait;
