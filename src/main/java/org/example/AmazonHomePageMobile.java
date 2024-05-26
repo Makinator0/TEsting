@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
@@ -23,7 +24,7 @@ public class AmazonHomePageMobile {
         this.wait = wait;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
-
+    @Step("Navigate to Amazon home page")
     public void navigateToHomePage() throws InterruptedException {
         WebElement continueButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("com.android.chrome:id/signin_fre_continue_button")));
         continueButton.click();
@@ -51,7 +52,7 @@ public class AmazonHomePageMobile {
         driver.pressKey(new KeyEvent(AndroidKey.ENTER));  // Use AndroidDriver's pressKey method
         Thread.sleep(7000); // 7 seconds delay
     }
-
+    @Step("Enter search term")
     public void enterSearchTerm() throws InterruptedException {
 
         WebElement clearSearchButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//android.view.View[@content-desc='Clear search keywords']")));
@@ -64,7 +65,7 @@ public class AmazonHomePageMobile {
         driver.pressKey(new KeyEvent(AndroidKey.ENTER));
         Thread.sleep(7000); // 7 seconds delay
     }
-
+    @Step("Go to books category")
     public void goToBooksCategory() throws InterruptedException {
         WebElement booksElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//android.view.View[@content-desc=\"Clear search keywords\"]")));
         booksElement.click();

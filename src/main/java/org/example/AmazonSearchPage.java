@@ -6,6 +6,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.NoSuchElementException;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -25,38 +26,40 @@ public class AmazonSearchPage {
         searchTerm = System.getProperty("searchTerm", "Python");
     }
 
-
+    @Step("Extract books data from search results")
     public List<Book> extractBooks() {
         List<Book> books = new ArrayList<>();
         List<WebElement> bookElements = driver.findElements(By.xpath("//android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View"));
+        System.out.println("Found " + bookElements.size() + " book elements.");
         for (WebElement bookElement : bookElements) {
             try {
-                books.add(extractBookData(bookElement));
+                Book book = extractBookData(bookElement);
+                if (!book.getAuthor().equals("Data not found")) {
+                    books.add(book);
+                }
             } catch (Exception e) {
                 System.err.println("Failed to extract book data: " + e.getMessage());
             }
         }
         return books;
     }
-
-
-
+    @Step("Extract book data from book element")
     private Book extractBookData(WebElement bookElement) {
-        String title = "Unavailable";
-        String author = "Unknown";
-        String price = "N/A";
-        boolean isBestSeller = false;
+        String title = safeGetText(bookElement, ".//android.widget.TextView[contains(@text, '"+searchTerm+"')]");
+        String author = safeGetText(bookElement, ".//android.widget.TextView[contains(@text, 'by')]/following-sibling::android.widget.TextView[1]");
+        String price = safeGetText(bookElement, ".//android.widget.TextView[contains(@text, '$')]");
 
-            title = safeGetText(bookElement, ".//android.widget.TextView[contains(@text, '"+searchTerm+"')]"); // Adjust the XPath to match your structure
-            author = safeGetText(bookElement, ".//android.widget.TextView[contains(@text, 'by')]/following-sibling::android.widget.TextView[1]");
-            // Adjust the XPath to match your structure
-            price = safeGetText(bookElement, ".//android.widget.TextView[contains(@text, '$')]"); // Adjust the XPath to match your structure
+        boolean isBestSeller = false;
+        try {
             WebElement bestSellerBadge = bookElement.findElement(By.xpath(".//android.view.View[contains(@text, 'Best Seller')]"));
             isBestSeller = bestSellerBadge != null && bestSellerBadge.getText().contains("Best Seller");
-
+        } catch (NoSuchElementException e) {
+            // Best seller badge not found
+        }
 
         return new Book(title, author, price, isBestSeller);
     }
+
 
     private String safeGetText(WebElement parent, String xpath) {
         try {
