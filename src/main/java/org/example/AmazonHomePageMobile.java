@@ -50,7 +50,7 @@ public class AmazonHomePageMobile {
         Thread.sleep(7000); // 7 seconds delay
 
         driver.pressKey(new KeyEvent(AndroidKey.ENTER));  // Use AndroidDriver's pressKey method
-        Thread.sleep(7000); // 7 seconds delay
+        Thread.sleep(23000);
     }
     @Step("Enter search term")
     public void enterSearchTerm() throws InterruptedException {
@@ -63,7 +63,7 @@ public class AmazonHomePageMobile {
             driver.pressKey(new KeyEvent(AndroidKey.valueOf(Character.toString(ch).toUpperCase())));
         }
         driver.pressKey(new KeyEvent(AndroidKey.ENTER));
-        Thread.sleep(7000); // 7 seconds delay
+        Thread.sleep(23000); // 7 seconds delay
     }
     @Step("Go to books category")
     public void goToBooksCategory() throws InterruptedException {
